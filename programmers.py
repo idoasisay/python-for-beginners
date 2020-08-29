@@ -13,7 +13,7 @@ def extract_programmers_pages():
   count = 0
   for link in pages:
     pages[count] = int(link.string)
-    count += 1
+    count += 
 
   max_page = pages[-1]
   return max_page
