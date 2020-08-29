@@ -35,12 +35,9 @@ def extract_job(html):
         location = '장소 불문'
     job_link = position_title["href"]
 
-    bonus = company_info.find("li", {"class": "bonus"}).text.strip()
-
     return {
         'title': title,
         'company': company,
-        'bonus': bonus,
         'experience': experience,
         'location': location,
         'job_link': f"https://programmers.co.kr{job_link}"
