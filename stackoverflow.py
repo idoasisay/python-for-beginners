@@ -29,8 +29,8 @@ def extract_job(html):
     return {
         "title": title,
         "company": company,
-        "location": location,
         "experience": experience,
+        "location": location,
         "job_link": f"http://www.saramin.co.kr/{job_link}"
     }
 
@@ -38,7 +38,7 @@ def extract_job(html):
 def extract_jobs(last_page):
     jobs = []
     for page in range(1, last_page + 1):
-        print(f"{page} 페이지 구인 광고를 크롤링 중입니다...")
+        print(f"{page} 페이지 사람인 구인 광고를 크롤링 중입니다...")
         so_api = requests.get(
             f"http://www.saramin.co.kr/zf_user/jobs/list/job-category?page={page}&cat_key=40426&search_optional_item=n&search_done=y&panel_count=y&isAjaxRequest=0&page_count=50&sort=RL&type=job-category&is_param=1&isSearchResultEmpty=1&isSectionHome=0&searchParamCount=1#searchTitle"
         )
@@ -47,7 +47,6 @@ def extract_jobs(last_page):
         for content in li:
             job = extract_job(content)
             jobs.append(job)
-    print(jobs)
     return jobs
 
 

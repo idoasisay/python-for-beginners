@@ -48,7 +48,7 @@ def extract_job(html):
 def extract_programmers_jobs(last_pages):
   jobs = []
   for page in range(1, last_pages + 1):
-    print(f"{page}페이지를 크롤링 중입니다...")
+    print(f"{page} 페이지 프로그래머스 구인 광고를 크롤링 중입니다...")
     result = requests.get(f"{PROGRAMMERS_URL}&page={page}")
     soup = BeautifulSoup(result.text, "html.parser")
     li = soup.find_all("li", {"class": "list-position-item"})
