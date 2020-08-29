@@ -1,5 +1,3 @@
-from programmers import extract_programmers_pages, extract_programmers_jobs
+from programmers import get_jobs as get_pro_jobs
 
-last_page = extract_programmers_pages()
-
-programmers_jobs = extract_programmers_jobs(last_page)
+programmers_jobs = get_pro_jobs()
