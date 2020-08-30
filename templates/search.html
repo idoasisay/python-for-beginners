@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>잡 서칭</title>
+    <style>
+      section {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(5,1fr);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>검색 결과</h1>
+    <h3> {{job_len}}건의 {{searchingBy}}에 대한 검색 결과입니다.</h3>
+    <a href="/export?lang={{searchingBy}}">{{searchingBy}} CSV Export</a>
+    <section>
+      <h4>title</h4>
+      <h4>company</h4>
+      <h4>location</h4>
+      <h4>experience</h4>
+      <h4>link</h4>
+      {% for job in jobs %}
+        <span>{{job.title}}</span>
+        <span>{{job.company}}</span>
+        <span>{{job.location}}</span>
+        <span>{{job.experience}}</span>
+        <a href='{{job.job_link}}' target='_blank'>지원하기</a>
+      {% endfor %}
+    </section>
+  </body>
+</html>
