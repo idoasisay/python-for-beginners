@@ -1,12 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 
-PROGRAMMERS_URL = 'https://programmers.co.kr/job?_=1598625231768&job_position%5Btags%5D%5B%5D=Python'
-
-
 # 페이지 번호 뽑기
-def extract_programmers_pages():
-    result = requests.get(PROGRAMMERS_URL)
+def get_last_page(url):
+    result = requests.get(url)
     soup = BeautifulSoup(result.text, "html.parser")
 
     pagination = soup.find("ul", {"class": "pagination"})
@@ -45,11 +42,11 @@ def extract_job(html):
 
 
 # 배열에 담아서 여러 개
-def extract_programmers_jobs(last_pages):
+def extract_jobs(last_pages, url):
   jobs = []
   for page in range(1, last_pages + 1):
     print(f"{page} 페이지 프로그래머스 구인 광고를 크롤링 중입니다...")
-    result = requests.get(f"{PROGRAMMERS_URL}&page={page}")
+    result = requests.get(f"{url}&page={page}")
     soup = BeautifulSoup(result.text, "html.parser")
     li = soup.find_all("li", {"class": "list-position-item"})
     for content in li:
@@ -58,7 +55,8 @@ def extract_programmers_jobs(last_pages):
   return jobs
 
 # 최종 값
-def get_jobs():
-  last_page = extract_programmers_pages()
-  jobs = extract_programmers_jobs(last_page)
+def get_jobs(search):
+  url = f'https://programmers.co.kr/job?_=1598625231768&job_position%5Btags%5D%5B%5D={search}'
+  last_page = get_last_page(url)
+  jobs = extract_jobs(last_page, url)
   return jobs
